@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@dhis2-app/test-tools": "^0.1.4",
+    "colors": "^1.4.0",
     "node-fetch": "^2.6.1"
   }
 }

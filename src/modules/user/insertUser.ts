@@ -21,5 +21,3 @@ export function insertUser(userObject:any):Promise<any>{
         throw Error(`Cannot insert user ${username}`)
     })
 }
-
-console.log('haha')
