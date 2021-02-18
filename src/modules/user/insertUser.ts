@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import {getCredentials} from "../shared/credentials";
+import {success} from "../shared/print";
 
 let {baseUrl, authorization} = getCredentials();
 
@@ -14,7 +15,7 @@ export function insertUser(userObject:any):Promise<any>{
         },
         body: JSON.stringify(userObject)
     }).then((response)=>{
-        if (response.ok) console.log(`User '${username}' successfully saved`);
+        if (response.ok) success(`User '${username}' successfully saved`);
         else throw Error(`Cannot insert user ${username}, status: ${response.statusText}`)
     }).catch((error)=>{
         console.error(error);
