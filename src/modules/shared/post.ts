@@ -13,7 +13,10 @@ export function postDv(query:string){
         },
         method: 'POST',
     }).then(r=>{
-        if (!r.ok) error(`DV POST failed ${query}`);
+        if (!r.ok) {
+            error(`DV POST failed ${query}`);
+            console.log(r);
+        }
         return r;
     }).catch(e => {
         console.log('res')
@@ -21,17 +24,21 @@ export function postDv(query:string){
     });
 }
 
-export function postJson(url:string, body:any){
+
+function sendData(method:string, url:string, body:any){
     return fetch(makeUrl(url), {
         credentials: 'include',
         headers: {
             'Authorization': 'Basic dGVzdC1kZS1zdXBlckFkbWluOkN5cHJlc3MxIQ==',
             'Content-type': 'application/json'
         },
-        method: 'POST',
+        method: method,
         body: JSON.stringify(body)
     }).catch(e => {
         console.log('res')
         throw e;
     });
 }
+
+export const postJson = (url: string, body:any)=>sendData('POST', url, body);
+export const patch = (url: string, body:any)=>sendData('PATCH', url, body);
