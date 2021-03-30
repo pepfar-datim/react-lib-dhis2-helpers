@@ -2,8 +2,6 @@ import {get} from "../shared/get";
 import {put} from "../shared/post";
 import {error, success} from "../shared/print";
 
-// export type DataStoreObject = Record<string,object[]>;
-
 export interface DataStoreObject {
     [key:string]:{
         [key:string]:{

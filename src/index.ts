@@ -6,3 +6,4 @@ export * from "./modules/approvals/getApprovalsData";
 export * from "./modules/shared/credentials";
 export * from "./modules/dataSet/extendDataSet";
 export * from "./modules/dataStore/editDataStore";
+export * from "./modules/dedupe/deleteDedupe";
