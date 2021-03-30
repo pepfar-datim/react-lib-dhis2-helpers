@@ -41,4 +41,5 @@ function sendData(method:string, url:string, body:any){
 }
 
 export const postJson = (url: string, body:any)=>sendData('POST', url, body);
+export const put = (url: string, body:any)=>sendData('PUT', url, body);
 export const patch = (url: string, body:any)=>sendData('PATCH', url, body);
