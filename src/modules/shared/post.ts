@@ -5,7 +5,7 @@ export function makeUrl(endpoint: string) {
     return `${process.env.DHIS_BASEURL}/api${endpoint}`;
 }
 
-export function postDv(query:string){
+export function postDv(query:string):Promise<any>{
     return fetch(makeUrl(`/dataValues?${query}`), {
         credentials: 'include',
         headers: {
@@ -25,7 +25,7 @@ export function postDv(query:string){
 }
 
 
-function sendData(method:string, url:string, body:any){
+function sendData(method:string, url:string, body:any):Promise<any>{
     return fetch(makeUrl(url), {
         credentials: 'include',
         headers: {
