@@ -4,6 +4,7 @@ export * from "./modules/user/insertUser";
 export * from "./modules/approvals/approvals";
 export * from "./modules/approvals/getApprovalsData";
 export * from "./modules/shared/credentials";
+export * from "./modules/shared/post";
 export * from "./modules/dataSet/extendDataSet";
 export * from "./modules/dataStore/editDataStore";
 export * from "./modules/dedupe/deleteDedupe";
