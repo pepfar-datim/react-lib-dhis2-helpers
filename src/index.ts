@@ -9,3 +9,4 @@ export * from "./modules/dataSet/extendDataSet";
 export * from "./modules/dataStore/editDataStore";
 export * from "./modules/dedupe/deleteDedupe";
 export * from "./modules/approvals/unapproveFromDedupe";
+export * from "./modules/cors/enableCors";

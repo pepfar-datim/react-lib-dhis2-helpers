@@ -16,10 +16,10 @@ export function unapproveMechanism(query:ApprovalQuery):Promise<any>{
     });
 }
 
-export async function recallMechToPartner(query):Promise<any>{
+export async function recallMechToPartner(query:ApprovalQuery):Promise<any>{
     let unapproved:boolean;
     do {
         unapproved = await unapproveMechanism(query)
     } while (unapproved)
-    success(`Mechanism ${query.aoc} is at Partner`);
+    success(`Mechanism ${query.approvals[0].aoc} is at Partner`);
 }
