@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import {getCredentials} from "../shared/credentials";
-import {success} from "../shared/print";
+import {error, success} from "../shared/print";
+import {green} from "colors/safe";
 
 let {baseUrl, authorization} = getCredentials();
 
@@ -16,7 +17,10 @@ export function insertUser(userObject:any):Promise<any>{
         body: JSON.stringify(userObject)
     }).then((response)=>{
         if (response.ok) success(`User '${username}' successfully saved`);
-        else throw Error(`Cannot insert user ${username}, status: ${response.statusText}`)
+        else {
+            error(`Cannot insert user: ${green(username)}`, response);
+            throw Error(`Stack trace:\n\n`)
+        }
     }).catch((error)=>{
         console.error(error);
         throw Error(`Cannot insert user ${username}`)
