@@ -11,5 +11,5 @@ const urls = [
 ]
 
 export function enableCors():Promise<any>{
-    return postJson('configuration/corsWhitelist',urls);
+    return postJson('/configuration/corsWhitelist',urls);
 }

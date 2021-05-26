@@ -1,15 +1,18 @@
 import fetch from "node-fetch";
 import {error} from "./print";
+import {getCredentials} from "./credentials";
 
 export function makeUrl(endpoint: string) {
     return `${process.env.DHIS_BASEURL}/api${endpoint}`;
 }
 
+let {baseUrl, authorization} = getCredentials();
+
 export function postDv(query:string):Promise<any>{
     return fetch(makeUrl(`/dataValues?${query}`), {
         credentials: 'include',
         headers: {
-            'Authorization': 'Basic dGVzdC1kZS1zdXBlckFkbWluOkN5cHJlc3MxIQ==',
+            'Authorization': authorization
         },
         method: 'POST',
     }).then(r=>{
@@ -19,7 +22,6 @@ export function postDv(query:string):Promise<any>{
         }
         return r;
     }).catch(e => {
-        console.log('res')
         throw e;
     });
 }
@@ -29,13 +31,18 @@ function sendData(method:string, url:string, body:any):Promise<any>{
     return fetch(makeUrl(url), {
         credentials: 'include',
         headers: {
-            'Authorization': 'Basic dGVzdC1kZS1zdXBlckFkbWluOkN5cHJlc3MxIQ==',
+            'Authorization': authorization,
             'Content-type': 'application/json'
         },
         method: method,
         body: JSON.stringify(body)
-    }).catch(e => {
-        console.log('res')
+    }).then(r=>{
+        if (!r.ok) {
+            error(`POST Failed ${url}`, body, r);
+        }
+        return r;
+    })
+    .catch(e => {
         throw e;
     });
 }
