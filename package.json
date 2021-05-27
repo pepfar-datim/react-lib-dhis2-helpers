@@ -14,9 +14,6 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {
@@ -29,29 +26,16 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@dhis2-app/test-data",
+  "name": "@pepfar-react-lib/dhis2-helpers",
   "author": "Jakub",
-  "module": "dist/test-data.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/test-data.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/test-data.esm.js",
-      "limit": "10 KB"
-    }
-  ],
+  "module": "dist/dhis2-helpers.esm.js",
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.9.2",
-    "husky": "^5.0.9",
-    "size-limit": "^4.9.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.1.0",
     "typescript": "^3.9.9"
   },
   "dependencies": {
-    "@dhis2-app/test-tools": "^0.1.4",
+    "@pepfar-react-lib/jest-tools": "^0.1.4",
     "btoa": "^1.2.1",
     "colors": "^1.4.0",
     "node-fetch": "^2.6.1"
