@@ -22,7 +22,7 @@ Then you can use loading methods via examples below.
 ### Users
 Assume you have a list of user objects. This script will push them for you to the server.
 ```javascript
-import {insertUser} from "@dhis2-app/test-data";
+import {insertUser} from "@pepfar-react-lib/dhis2-helpers";
 const users = require('./mixedUsers.json');  // JSON with DHIS2 user objects
 
 users.forEach(u=>{
@@ -79,7 +79,7 @@ export const dedupeValueSets:DedupeValueSet[] = [Rwanda1,Rwanda2];
 Then you can use dedupe loader:
 ```javascript
 import {dedupeValueSets} from "./dataValues.data";
-import {insertDedupes} from "@dhis2-app/test-data";
+import {insertDedupes} from "@pepfar-react-lib/dhis2-helpers";
 
 insertDedupes(dedupeValueSets);
 ```

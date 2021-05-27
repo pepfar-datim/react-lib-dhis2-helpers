@@ -1,4 +1,4 @@
-import {pause} from "@dhis2-app/test-tools";
+import {pause} from "@pepfar-react-lib/jest-tools";
 import {DedupeValue, DedupeValueSet} from "./dedupe.model";
 import {insertDataValue} from "../dataValue/insertDataValue";
 
