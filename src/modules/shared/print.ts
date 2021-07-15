@@ -6,8 +6,9 @@ export const exception = (message:string, ...details:any)=>{
 }
 
 export const error = (message:string, ...details:any)=>{
-    details.forEach(console.log)
-    console.log(red(message)+'\n\n');
+    console.log(red(message));
+    details.forEach((d)=>console.log(red(d)));
+    console.log('')
 }
 
 export const success = (message:string)=>console.log(green(message));

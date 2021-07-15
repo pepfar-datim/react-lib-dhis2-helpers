@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import {error} from "./print";
 import {getCredentials} from "./credentials";
+import {noTextsIn} from "@pepfar-react-lib/jest-tools";
 
 export function makeUrl(endpoint: string) {
     return `${process.env.DHIS_BASEURL}/api${endpoint}`;
@@ -15,10 +16,20 @@ export function postDv(query:string):Promise<any>{
             'Authorization': authorization
         },
         method: 'POST',
-    }).then(r=>{
+    }).then(async r=>{
         if (!r.ok) {
-            error(`DV POST failed ${query}`);
-            console.log(r);
+            // console.log(r.statusText)
+            let text;
+            try {
+                text = JSON.parse(await r.text() as any).message;
+            } catch(e){
+                text = 'ERROR: Cannot retrieve server response'
+            }
+            error(
+                `Data Value insert failed > ${query}`,
+                `Status: ${r.status} (${r.statusText})`,
+                `Response: ${text}`
+            );
         }
         return r;
     }).catch(e => {
