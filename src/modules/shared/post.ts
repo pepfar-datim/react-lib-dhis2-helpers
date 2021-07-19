@@ -1,13 +1,32 @@
 import fetch from "node-fetch";
 import {error} from "./print";
 import {getCredentials} from "./credentials";
-import {noTextsIn} from "@pepfar-react-lib/jest-tools";
 
 export function makeUrl(endpoint: string) {
     return `${process.env.DHIS_BASEURL}/api${endpoint}`;
 }
 
-let {baseUrl, authorization} = getCredentials();
+let {authorization} = getCredentials();
+
+const processResponse = (type:string)=>async r=>{
+    if (!r.ok) {
+        let responseBody = '(empty)';
+        try {
+            let response = JSON.parse(await r.text() as any);
+            if (response.message) responseBody = response.message;
+        } catch(e){
+            responseBody = 'ERROR: Cannot retrieve server response'
+        }
+        error(
+            `Server request failed`,
+            `Type:\t  ${type}`,
+            `URL:\t  ${r.url}`,
+            `Status:\t  ${r.status} (${r.statusText})`,
+            `Response: ${responseBody}`
+        );
+    }
+    return r;
+}
 
 export function postDv(query:string):Promise<any>{
     return fetch(makeUrl(`/dataValues?${query}`), {
@@ -16,23 +35,7 @@ export function postDv(query:string):Promise<any>{
             'Authorization': authorization
         },
         method: 'POST',
-    }).then(async r=>{
-        if (!r.ok) {
-            // console.log(r.statusText)
-            let text;
-            try {
-                text = JSON.parse(await r.text() as any).message;
-            } catch(e){
-                text = 'ERROR: Cannot retrieve server response'
-            }
-            error(
-                `Data Value insert failed > ${query}`,
-                `Status: ${r.status} (${r.statusText})`,
-                `Response: ${text}`
-            );
-        }
-        return r;
-    }).catch(e => {
+    }).then(processResponse('POST')).catch(e => {
         throw e;
     });
 }
@@ -47,13 +50,7 @@ function sendData(method:string, url:string, body:any):Promise<any>{
         },
         method: method,
         body: JSON.stringify(body)
-    }).then(r=>{
-        if (!r.ok) {
-            error(`POST Failed ${url}`, body, r);
-        }
-        return r;
-    })
-    .catch(e => {
+    }).then(processResponse(method)).catch(e => {
         throw e;
     });
 }

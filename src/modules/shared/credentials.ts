@@ -12,7 +12,7 @@ let username = process.env.DHIS_USERNAME;
 let password = process.env.DHIS_PASSWORD;
 
 if (!baseUrl||!username||!password) {
-    error(`Please specify environment variables: DHIS_BASEURL, DHIS_USERNAME, DHIS_PASSWORD`)
+    error(`Please specify environment variables: DHIS_BASEURL, DHIS_USERNAME, DHIS_PASSWORD`);
     process.exit(1);
 }
 
