@@ -17,6 +17,6 @@ if (!baseUrl||!username||!password) {
 }
 
 let authorization = 'Basic ' + btoa(username + ":" + password);
-console.log(`Using ${baseUrl} / ${username}\n`);
+console.log(`Using ${baseUrl} / ${username}`);
 
 export const getCredentials:()=>Credentials = ()=>({baseUrl, authorization})

@@ -11,3 +11,5 @@ export * from "./modules/dedupe/deleteDedupe";
 export * from "./modules/approvals/unapproveFromDedupe";
 export * from "./modules/cors/enableCors";
 export * from "./modules/extendMechanismCo/extendMechanismCo";
+export * from "./modules/testDataLoader/testDataLoader";
+export * from "./modules/resourceTables/generateResourceTables";
