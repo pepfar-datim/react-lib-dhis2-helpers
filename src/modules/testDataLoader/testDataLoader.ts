@@ -31,11 +31,6 @@ async function processFile(type: FileType, file:string){
 }
 
 export async function testDataLoader(files:string[]){
-    // files.forEach(async file=>{
-    //     if (file.includes('.ts')) return await processFile(FileType.node, file);
-    //     if (file.includes('.py')) return await processFile(FileType.python, file);
-    //     throw new Error(`Unknown file type ${file}`);
-    // });
     for(var i=0;i<files.length;i++){
         let file = files[i];
         if (file.includes('.ts')) await processFile(FileType.node, file);
