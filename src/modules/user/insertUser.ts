@@ -21,6 +21,7 @@ export function insertUser(userObject:any):Promise<any>{
             error(`Cannot insert user: ${green(username)}`, response);
             throw Error(`Stack trace:\n\n`)
         }
+        return response;
     }).catch((error)=>{
         console.error(error);
         throw Error(`Cannot insert user ${username}`)
