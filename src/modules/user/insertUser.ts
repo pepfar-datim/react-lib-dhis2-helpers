@@ -15,12 +15,15 @@ export function insertUser(userObject:any):Promise<any>{
             'Authorization': authorization
         },
         body: JSON.stringify(userObject)
-    }).then((response)=>{
-        if (response.ok) success(`User '${username}' successfully saved`);
-        else {
-            error(`Cannot insert user: ${green(username)}`, response);
-            throw Error(`Stack trace:\n\n`)
+    }).then(async (response)=>{
+        if (!response.ok) return error(`Cannot insert user ${username}`, response.statusText);
+        let jsonResp:any = await response.json();
+        if (!jsonResp || !jsonResp.status || !jsonResp.stats) return error(`Cannot insert user ${username}`);
+        if (jsonResp.status==='ERROR' || jsonResp.stats.ignored!==0) {
+            error(`Cannot insert user ${username}`);
+            return error(jsonResp.typeReports[0].objectReports[0].errorReports[0].message)
         }
+        success(`User '${username}' successfully saved`);
         return response;
     }).catch((error)=>{
         console.error(error);

@@ -1,4 +1,7 @@
-# DHIS2 Test Data Loaders
+**Repo Owner:** Ben Guaraldi [@benguaraldi](https://github.com/benguaraldi)
+
+
+# DHIS2 Helpers
 This is a set of scripts written in JavaScript/Node.js which can help you load data/metadata into DHIS2 instance.
 
 ## List of loaders
